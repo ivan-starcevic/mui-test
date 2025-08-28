@@ -24,7 +24,7 @@ export default function PageHeading({
 }) {
   return (
     <Box sx={{ width: '100%', p: 4 }}>
-      <Box sx={{ maxWidth: 1200, mx: 'auto', width: '100%' }}>
+      <Box sx={{ mx: 'auto', width: '100%' }}>
         <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
           {breadcrumbs.map((item, idx) =>
             item.href ? (

@@ -46,69 +46,68 @@ export default function ResponsiveTester({
   };
 
   return (
-    <Box sx={{ width: '100%', display: 'flex', justifyContent: 'flex-start' }}>
+    <Box sx={{ width: '100%', display: 'flex', alignItems: 'stretch' }}>
+      {/* Resizable content container with hatched background */}
       <Box
         ref={containerRef}
         sx={{
-          position: 'relative',
           width,
           height,
           border: '1px solid',
           borderColor: 'divider',
           borderRadius: 1,
-          backgroundColor: 'background.paper',
           overflow: 'hidden',
-          boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.02)',
           transition: isDraggingRef.current ? 'none' : 'width 120ms ease',
+          backgroundImage:
+            'repeating-linear-gradient(45deg, rgba(0,0,0,0.04) 0 10px, transparent 10px 20px)',
+          backgroundColor: 'background.paper',
         }}
       >
         <Box sx={{ p: 2 }}>{children}</Box>
+      </Box>
 
-        {/* Right drag handle */}
-        <Box
-          onMouseDown={onHandleMouseDown}
-          sx={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            height: '100%',
-            width: 10,
-            cursor: 'ew-resize',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            '&:before': {
-              content: '""',
-              display: 'block',
-              width: 2,
-              height: 24,
-              borderRadius: 1,
-              backgroundColor: 'divider',
-            },
-            '&:hover:before': {
-              backgroundColor: 'text.disabled',
-            },
-          }}
-        />
-
-        {/* Width indicator */}
-        <Box
-          sx={{
-            position: 'absolute',
-            bottom: 8,
-            right: 12,
-            px: 1,
-            py: 0.25,
+      {/* External right drag handle */}
+      <Box
+        onMouseDown={onHandleMouseDown}
+        sx={{
+          ml: 0.5,
+          width: 12,
+          cursor: 'ew-resize',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          userSelect: 'none',
+          '&:before': {
+            content: '""',
+            display: 'block',
+            width: 2,
+            height: 28,
             borderRadius: 1,
-            bgcolor: 'rgba(0,0,0,0.06)',
-            border: '1px solid',
-            borderColor: 'divider',
-            fontSize: 12,
-            color: 'text.secondary',
-          }}
-        >
-          {Math.round(width)}px
-        </Box>
+            backgroundColor: 'divider',
+          },
+          '&:hover:before': {
+            backgroundColor: 'text.disabled',
+          },
+        }}
+      />
+
+      {/* External width indicator */}
+      <Box
+        sx={{
+          ml: 1,
+          alignSelf: 'center',
+          px: 1,
+          py: 0.25,
+          borderRadius: 1,
+          bgcolor: 'rgba(0,0,0,0.06)',
+          border: '1px solid',
+          borderColor: 'divider',
+          fontSize: 12,
+          color: 'text.secondary',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {Math.round(width)}px
       </Box>
     </Box>
   );
