@@ -15,6 +15,8 @@ export default function IconButtonSizes() {
     authoredPaddingBottom: '',
     authoredPaddingLeft: '',
     authoredFontSize: '',
+    authoredPadding: '',
+    computedPadding: '',
   });
 
   React.useLayoutEffect(() => {
@@ -34,6 +36,34 @@ export default function IconButtonSizes() {
     };
 
     const authored = el.style; // inline authored styles only
+
+    const toPaddingShorthand = (top, right, bottom, left) => {
+      if (!top && !right && !bottom && !left) return '';
+      const t = top || '0px';
+      const r = right || '0px';
+      const b = bottom || '0px';
+      const l = left || '0px';
+      if (t === r && r === b && b === l) return t;
+      if (t === b && r === l) return `${t} ${r}`;
+      if (r === l) return `${t} ${r} ${b}`;
+      return `${t} ${r} ${b} ${l}`;
+    };
+
+    const computedPaddingShorthand = toPaddingShorthand(
+      computed.paddingTop,
+      computed.paddingRight,
+      computed.paddingBottom,
+      computed.paddingLeft
+    );
+
+    const authoredPaddingShorthand = authored.padding
+      ? authored.padding
+      : toPaddingShorthand(
+          authored.paddingTop,
+          authored.paddingRight,
+          authored.paddingBottom,
+          authored.paddingLeft
+        );
     setMetrics({
       paddingTop: computed.paddingTop || '',
       paddingRight: computed.paddingRight || '',
@@ -45,6 +75,8 @@ export default function IconButtonSizes() {
       authoredPaddingBottom: authored.paddingBottom || '',
       authoredPaddingLeft: authored.paddingLeft || '',
       authoredFontSize: authored.fontSize || toRemIfPx(computed.fontSize),
+      authoredPadding: authoredPaddingShorthand,
+      computedPadding: computedPaddingShorthand,
     });
   }, []);
 
@@ -67,10 +99,7 @@ export default function IconButtonSizes() {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         <Row name="font-size" authored={metrics.authoredFontSize} computed={metrics.fontSize} />
-        <Row name="padding-top" authored={metrics.authoredPaddingTop} computed={metrics.paddingTop} />
-        <Row name="padding-right" authored={metrics.authoredPaddingRight} computed={metrics.paddingRight} />
-        <Row name="padding-bottom" authored={metrics.authoredPaddingBottom} computed={metrics.paddingBottom} />
-        <Row name="padding-left" authored={metrics.authoredPaddingLeft} computed={metrics.paddingLeft} />
+        <Row name="padding" authored={metrics.authoredPadding} computed={metrics.computedPadding} />
       </div>
     </div>
   );
