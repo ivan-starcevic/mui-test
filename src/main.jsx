@@ -19,7 +19,16 @@ createRoot(document.getElementById("root")).render(
       />
 
       <CssPropViewer
-        title={'IconButton size="small"'}
+        title={'IconButton size="small" with Star (fontSize="inherit")'}
+        component={IconButton}
+        props={{ color: 'secondary', size: 'small' }}
+        childrenComponent={StarIcon}
+        childrenProps={{ fontSize: 'inherit' }}
+        cssProps={["font-size", "padding"]}
+      />
+
+      <CssPropViewer
+        title={'IconButton size="small" with Star (fontSize="small")'}
         component={IconButton}
         props={{ color: 'secondary', size: 'small' }}
         childrenComponent={StarIcon}
