@@ -5,43 +5,37 @@ import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Badge from '@mui/material/Badge';
-import Box from '@mui/material/Box';
-import ContentCut from '@mui/icons-material/ContentCut';
-import ContentCopy from '@mui/icons-material/ContentCopy';
-import ContentPaste from '@mui/icons-material/ContentPaste';
 import Cloud from '@mui/icons-material/Cloud';
+import Badge from '@mui/material/Badge';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import InfoIcon from '@mui/icons-material/Info';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
-export default function IconMenuWithBadge() {
+
+
+export default function IconMenu() {
   return (
     <Paper sx={{ width: 320, maxWidth: '100%' }}>
       <MenuList>
         <MenuItem>
           <ListItemIcon>
-            <ContentCut fontSize="small" />
+            <Badge color="primary" variant="dot" overlap="circular">
+              <NotificationsIcon fontSize="small" />
+            </Badge>
           </ListItemIcon>
-          <ListItemText>Cut</ListItemText>
-          <Badge color="primary" badgeContent="⌘X">
-            <Box sx={{ width: 16, height: 16 }} />
-          </Badge>
+          <ListItemText>Notifications</ListItemText>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <ContentCopy fontSize="small" />
+            <InfoIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText>Copy</ListItemText>
-          <Badge color="primary" badgeContent="⌘C">
-            <Box sx={{ width: 16, height: 16 }} />
-          </Badge>
+          <ListItemText>Product Feedback</ListItemText>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <ContentPaste fontSize="small" />
+            <HelpOutlineIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText>Paste</ListItemText>
-          <Badge color="primary" badgeContent="⌘V">
-            <Box sx={{ width: 16, height: 16 }} />
-          </Badge>
+          <ListItemText>Help</ListItemText>
         </MenuItem>
         <Divider />
         <MenuItem>
@@ -54,5 +48,3 @@ export default function IconMenuWithBadge() {
     </Paper>
   );
 }
-
-
