@@ -11,58 +11,52 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import InfoIcon from '@mui/icons-material/Info';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import Chip from '@mui/material/Chip';
-import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
-  '& .MuiBadge-badge': {
-    right: -3,
-    top: 13,
-    border: `2px solid ${((theme.vars ?? theme).palette.background).paper}`,
-    padding: '0 4px',
-  },
+    '& .MuiBadge-badge': {
+        right: -3,
+        top: 11,
+        border: `2px solid ${((theme.vars ?? theme).palette.background).paper}`,
+        padding: '0 4px',
+    },
 }));
 
-
-
 export default function IconMenu() {
-  return (
-    <Paper sx={{ width: 320, maxWidth: '100%' }}>
-      <MenuList>
-        <MenuItem>
-          <ListItemIcon>
-            <Badge color="primary" variant="dot" overlap="circular">
-              <NotificationsIcon fontSize="small" />
-            </Badge>
-          </ListItemIcon>
-          <ListItemText>Notifications</ListItemText>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <InfoIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Product Feedback</ListItemText>
-          <Box sx={{ ml: 'auto' }}>
-            <StyledBadge badgeContent={4} color="secondary">
-              <Box sx={{ width: 16, height: 16 }} />
-            </StyledBadge>
-          </Box>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <HelpOutlineIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Help</ListItemText>
-        </MenuItem>
-        <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <Cloud fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Web Clipboard</ListItemText>
-          <Chip label="2" size="small" variant="solid" color="primary" sx={{ ml: 'auto' }} />
-        </MenuItem>
-      </MenuList>
-    </Paper>
-  );
+    return (
+        <Paper sx={{ width: 320, maxWidth: '100%' }}>
+            <MenuList>
+                <MenuItem>
+                    <ListItemIcon>
+                        <Badge color="primary" variant="dot" overlap="circular">
+                            <NotificationsIcon fontSize="medium" />
+                        </Badge>
+                    </ListItemIcon>
+                    <ListItemText>Notifications</ListItemText>
+                </MenuItem>
+                <MenuItem>
+                    <ListItemIcon>
+                        <StyledBadge badgeContent={4} color="secondary">
+                            <InfoIcon fontSize="medium" />
+                        </StyledBadge>
+                    </ListItemIcon>
+                    <ListItemText>Product Feedback</ListItemText>
+                </MenuItem>
+                <MenuItem>
+                    <ListItemIcon>
+                        <HelpOutlineIcon fontSize="medium" />
+                    </ListItemIcon>
+                    <ListItemText>Help</ListItemText>
+                </MenuItem>
+                <Divider />
+                <MenuItem>
+                    <ListItemIcon>
+                        <Cloud fontSize="medium" />
+                    </ListItemIcon>
+                    <ListItemText>Web Clipboard</ListItemText>
+                    <Chip label="2" size="small" variant="solid" color="primary" sx={{ ml: 'auto' }} />
+                </MenuItem>
+            </MenuList>
+        </Paper>
+    );
 }
