@@ -58,8 +58,6 @@ export default function ResponsiveTester({
           borderRadius: 1,
           overflow: 'hidden',
           transition: isDraggingRef.current ? 'none' : 'width 120ms ease',
-          backgroundImage:
-            'repeating-linear-gradient(45deg, rgba(0,0,0,0.04) 0 10px, transparent 10px 20px)',
           backgroundColor: 'background.paper',
         }}
       >
