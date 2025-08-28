@@ -8,7 +8,7 @@ import React from 'react';
  * - cssProps: array of CSS property names to display, e.g., ['padding', 'font-size']
  * - title: optional label for this viewer instance
  */
-export default function CssPropViewer({ component, props = {}, cssProps = [], title }) {
+export default function CssPropViewer({ component, props = {}, cssProps = [], title, childrenComponent, childrenProps = {} }) {
   const elementRef = React.useRef(null);
   const [values, setValues] = React.useState([]);
 
@@ -67,6 +67,7 @@ export default function CssPropViewer({ component, props = {}, cssProps = [], ti
   }, [component, props, cssProps]);
 
   const Comp = component;
+  const ChildrenComp = childrenComponent;
   return (
     <div style={{
       display: 'grid',
@@ -79,7 +80,9 @@ export default function CssPropViewer({ component, props = {}, cssProps = [], ti
       background: 'rgba(0,0,0,0.02)'
     }}>
       <div style={{ display: 'grid', placeItems: 'center' }}>
-        <Comp ref={elementRef} {...props} />
+        <Comp ref={elementRef} {...props}>
+          {ChildrenComp ? <ChildrenComp {...childrenProps} /> : props.children}
+        </Comp>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {title ? (
