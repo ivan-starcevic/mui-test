@@ -47,7 +47,7 @@ export default function ResponsiveTester({
 
   return (
     <Box sx={{ width: '100%', display: 'flex', alignItems: 'stretch' }}>
-      {/* Resizable content container with hatched background */}
+      {/* Resizable content container */}
       <Box
         ref={containerRef}
         sx={{
