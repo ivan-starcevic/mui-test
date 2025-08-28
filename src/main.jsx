@@ -1,1 +1,14 @@
-import React from "react"\nimport { createRoot } from "react-dom/client"\nimport CssBaseline from "@mui/material/CssBaseline"\nimport Container from "@mui/material/Container"\nimport IconButtonSizes from "./IconButtonSizes.jsx"\n\ncreateRoot(document.getElementById("root")).render(\n  <React.StrictMode>\n    <CssBaseline />\n    <Container sx={{ p: 4 }}>\n      <IconButtonSizes />\n    </Container>\n  </React.StrictMode>\n)\n
+import React from "react";
+import { createRoot } from "react-dom/client";
+import CssBaseline from "@mui/material/CssBaseline";
+import Container from "@mui/material/Container";
+import IconButtonSizes from "./IconButtonSizes.jsx";
+
+createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <CssBaseline />
+    <Container sx={{ p: 4 }}>
+      <IconButtonSizes />
+    </Container>
+  </React.StrictMode>
+);
