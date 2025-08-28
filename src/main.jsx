@@ -18,14 +18,14 @@ createRoot(document.getElementById("root")).render(
       />
 
       <CssPropViewer
-        title="IconButton size=\"small\""
+        title={'IconButton size="small"'}
         component={IconButton}
         props={{ color: 'secondary', size: 'small', children: <DeleteIcon /> }}
         cssProps={["font-size", "padding"]}
       />
 
       <CssPropViewer
-        title="IconButton size=\"large\" with inline styles"
+        title={'IconButton size="large" with inline styles'}
         component={IconButton}
         props={{ sx: { fontSize: '1.5rem', p: 2 }, children: <DeleteIcon /> }}
         cssProps={["font-size", "padding"]}
