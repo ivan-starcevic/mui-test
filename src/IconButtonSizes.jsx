@@ -5,54 +5,55 @@ import DeleteIcon from '@mui/icons-material/Delete';
 export default function IconButtonSizes() {
   const buttonRef = React.useRef(null);
   const [metrics, setMetrics] = React.useState({
-    width: '',
-    height: '',
-    minWidth: '',
-    minHeight: '',
+    paddingTop: '',
+    paddingRight: '',
+    paddingBottom: '',
+    paddingLeft: '',
+    fontSize: '',
   });
 
   React.useLayoutEffect(() => {
     if (!buttonRef.current) return;
     const computed = window.getComputedStyle(buttonRef.current);
     setMetrics({
-      width: computed.width || '',
-      height: computed.height || '',
-      minWidth: computed.minWidth || '',
-      minHeight: computed.minHeight || '',
+      paddingTop: computed.paddingTop || '',
+      paddingRight: computed.paddingRight || '',
+      paddingBottom: computed.paddingBottom || '',
+      paddingLeft: computed.paddingLeft || '',
+      fontSize: computed.fontSize || '',
     });
   }, []);
 
   return (
     <div
       style={{
-        position: 'relative',
-        width: '100%',
-        height: '60vh',
         display: 'grid',
-        placeItems: 'center',
+        gridTemplateColumns: 'auto 1fr',
+        alignItems: 'center',
+        gap: 24,
+        width: '100%',
+        minHeight: '50vh',
       }}
     >
-      <IconButton ref={buttonRef} color="primary" aria-label="center icon button">
-        <DeleteIcon />
-      </IconButton>
+      <div style={{ display: 'grid', placeItems: 'center' }}>
+        <IconButton ref={buttonRef} color="primary" aria-label="icon button">
+          <DeleteIcon />
+        </IconButton>
+      </div>
 
-      <div style={{ position: 'absolute', top: 16, textAlign: 'center' }}>
-        <Label name="height" value={metrics.height} />
-      </div>
-      <div style={{ position: 'absolute', bottom: 16, textAlign: 'center' }}>
-        <Label name="min-height" value={metrics.minHeight} />
-      </div>
-      <div style={{ position: 'absolute', left: 16, textAlign: 'left' }}>
-        <Label name="width" value={metrics.width} />
-      </div>
-      <div style={{ position: 'absolute', right: 16, textAlign: 'right' }}>
-        <Label name="min-width" value={metrics.minWidth} />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <Label name="font-size" value={metrics.fontSize} condition={!!metrics.fontSize} />
+        <Label name="padding-top" value={metrics.paddingTop} condition={!!metrics.paddingTop && metrics.paddingTop !== '0px'} />
+        <Label name="padding-right" value={metrics.paddingRight} condition={!!metrics.paddingRight && metrics.paddingRight !== '0px'} />
+        <Label name="padding-bottom" value={metrics.paddingBottom} condition={!!metrics.paddingBottom && metrics.paddingBottom !== '0px'} />
+        <Label name="padding-left" value={metrics.paddingLeft} condition={!!metrics.paddingLeft && metrics.paddingLeft !== '0px'} />
       </div>
     </div>
   );
 }
 
-function Label({ name, value }) {
+function Label({ name, value, condition = true }) {
+  if (!condition) return null;
   return (
     <div
       style={{
@@ -64,10 +65,11 @@ function Label({ name, value }) {
         fontSize: 12,
         color: '#111',
         backdropFilter: 'blur(2px)',
+        width: 'fit-content',
       }}
     >
       <strong style={{ textTransform: 'uppercase' }}>{name}</strong>{' '}
-      <span>{value || 'n/a'}</span>
+      <span>{value}</span>
     </div>
   );
 }
