@@ -10,6 +10,7 @@ import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import InfoIcon from '@mui/icons-material/Info';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import Chip from '@mui/material/Chip';
 
 
 
@@ -43,6 +44,7 @@ export default function IconMenu() {
             <Cloud fontSize="small" />
           </ListItemIcon>
           <ListItemText>Web Clipboard</ListItemText>
+          <Chip label="2" size="small" variant="outlined" sx={{ ml: 'auto' }} />
         </MenuItem>
       </MenuList>
     </Paper>
