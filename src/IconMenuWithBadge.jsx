@@ -11,6 +11,17 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import InfoIcon from '@mui/icons-material/Info';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import Chip from '@mui/material/Chip';
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${((theme.vars ?? theme).palette.background).paper}`,
+    padding: '0 4px',
+  },
+}));
 
 
 
@@ -31,6 +42,11 @@ export default function IconMenu() {
             <InfoIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Product Feedback</ListItemText>
+          <Box sx={{ ml: 'auto' }}>
+            <StyledBadge badgeContent={4} color="secondary">
+              <Box sx={{ width: 16, height: 16 }} />
+            </StyledBadge>
+          </Box>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
@@ -44,7 +60,7 @@ export default function IconMenu() {
             <Cloud fontSize="small" />
           </ListItemIcon>
           <ListItemText>Web Clipboard</ListItemText>
-          <Chip label="2" size="small" variant="outlined" sx={{ ml: 'auto' }} />
+          <Chip label="2" size="small" variant="solid" color="primary" sx={{ ml: 'auto' }} />
         </MenuItem>
       </MenuList>
     </Paper>
