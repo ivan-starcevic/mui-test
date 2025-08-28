@@ -6,11 +6,13 @@ import CssPropViewer from "./CssPropViewer.jsx";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import StarIcon from "@mui/icons-material/Star";
+import IconMenuWithBadge from "./IconMenuWithBadge.jsx";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <CssBaseline />
     <Container sx={{ p: 4, display: 'grid', gap: 24 }}>
+      <IconMenuWithBadge />
       <CssPropViewer
         title="IconButton default"
         component={IconButton}
