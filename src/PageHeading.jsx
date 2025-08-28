@@ -20,6 +20,10 @@ export default function PageHeading({
     { label: 'Section', href: '#' },
     { label: 'Current' },
   ],
+  // New slot-like API
+  enableActions = true,
+  actions,
+  // Back-compat: keep rightActions if already used
   rightActions,
 }) {
   return (
@@ -56,16 +60,16 @@ export default function PageHeading({
             ) : null}
           </Box>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
-            {rightActions ? (
-              rightActions
-            ) : (
-              <>
-                <Button variant="outlined" color="inherit">Secondary action</Button>
-                <Button variant="contained">Primary action</Button>
-              </>
-            )}
-          </Box>
+          {enableActions ? (
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
+              {actions ?? rightActions ?? (
+                <>
+                  <Button variant="outlined" color="inherit">Secondary action</Button>
+                  <Button variant="contained">Primary action</Button>
+                </>
+              )}
+            </Box>
+          ) : null}
         </Box>
       </Box>
     </Box>
