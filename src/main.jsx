@@ -2,7 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
-import FormFieldDemo from "./FormFieldDemo.jsx";
+import FormFieldDemo from "./components/FormField/FormFieldDemo.jsx";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
