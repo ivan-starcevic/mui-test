@@ -1,49 +1,58 @@
-# AtomicTextField
+# External Labels Demo
 
-A simple demonstration of how to achieve external labels using MUI's built-in components without creating custom components.
+This folder contains a single demo component that showcases how to create form fields with external labels using Material-UI components.
 
-## 🎯 Purpose
+## File: `ExternalLabelsDemo.jsx`
 
-This example shows that you can achieve the "labeled input with external label" effect using MUI's existing components:
-- `FormControl`
-- `FormLabel` 
-- `OutlinedInput`
-- `FormHelperText`
+A complete, self-contained demo that demonstrates three different input variants with external labels:
 
-## 📝 Code Example
+1. **Outlined Input** - Uses `OutlinedInput` with external `FormLabel`
+2. **Filled Input** - Uses `FilledInput` with `hiddenLabel` prop and external `FormLabel`
+3. **Standard Input** - Uses `Input` with CSS overrides and external `FormLabel`
+
+## How to Use
+
+### Import and Display the Demo
 
 ```jsx
-import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import FormHelperText from '@mui/material/FormHelperText';
+import ExternalLabelsDemo from './src/components/AtomicTextField/ExternalLabelsDemo.jsx';
 
-export default function BasicTextFields() {
+function App() {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-      <FormControl margin="dense">
-        <FormLabel id="outlined-label-id" sx={{ mb: 1 }}>
-          Label (Outlined)
-        </FormLabel>
-        <OutlinedInput placeholder="Placeholder" size="small" />
-        <FormHelperText>Helper text</FormHelperText>
-      </FormControl>
-    </Box>
+    <div>
+      <h1>MUI External Labels Example</h1>
+      <ExternalLabelsDemo />
+    </div>
   );
 }
 ```
 
-## ✨ Benefits
+### Use Individual Components
 
-- **No Custom Components**: Uses only MUI's built-in components
-- **Simple**: Minimal code, easy to understand
-- **Maintainable**: Leverages MUI's tested and maintained components
-- **Flexible**: Easy to customize using MUI's theming system
+You can also extract individual form controls from the demo:
 
-## 🎨 Key Components Used
+```jsx
+import { FormControl, FormLabel, OutlinedInput, FormHelperText } from '@mui/material';
 
-- **FormControl**: Container for form elements
-- **FormLabel**: External label positioned above input
-- **OutlinedInput**: The actual input field
-- **FormHelperText**: Helper text below the input
+function MyForm() {
+  return (
+    <FormControl variant="outlined">
+      <FormLabel htmlFor="my-input">My Label</FormLabel>
+      <OutlinedInput id="my-input" name="my-input" />
+      <FormHelperText>Helper text</FormHelperText>
+    </FormControl>
+  );
+}
+```
+
+## Key Features
+
+- **External Labels**: Labels positioned outside input fields
+- **Accessibility**: Proper `id` and `htmlFor` attributes
+- **Consistent Spacing**: CSS overrides for uniform appearance
+- **Three Variants**: Outlined, Filled, and Standard input styles
+- **Self-Contained**: All necessary imports and styling included
+
+## Browser Compatibility
+
+This demo works with all modern browsers and includes proper accessibility features for screen readers.
