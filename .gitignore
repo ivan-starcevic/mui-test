@@ -30,3 +30,6 @@ tsconfig.tsbuildinfo
 
 # Misc
 *.local
+
+*storybook.log
+storybook-static
