@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   FormControl,
-  FormLabel,
+  InputLabel,
   OutlinedInput,
   FilledInput,
   Input,
@@ -97,15 +97,16 @@ const ExternalLabelTextField = ({
       hiddenLabel={inputVariant === 'filled'}
       {...slotProps.root}
     >
-      <FormLabel
+      <InputLabel
         id={labelId}
         htmlFor={inputId}
+        disableAnimation={true}
         sx={{ mb: 1 }}
         required={required}
         {...slotProps.label}
       >
         {label}
-      </FormLabel>
+      </InputLabel>
 
       {renderInput()}
 
