@@ -1,12 +1,7 @@
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { withThemeByClassName } from '@storybook/addon-themes';
-import { lightTheme, darkTheme, customTheme } from './theme';
-import { globalTypes } from './globalTypes';
+import { createTheme } from '@mui/material/styles';
 
 /** @type { import('@storybook/react-vite').Preview } */
 const preview = {
-  globalTypes,
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
@@ -83,44 +78,8 @@ const preview = {
       },
     },
     layout: 'centered',
-    themes: {
-      default: 'light',
-      list: [
-        { name: 'light', class: 'light', color: '#ffffff' },
-        { name: 'dark', class: 'dark', color: '#121212' },
-        { name: 'custom', class: 'custom', color: '#f5f5f5' },
-      ],
-    },
   },
-  decorators: [
-    withThemeByClassName({
-      themes: {
-        light: 'light',
-        dark: 'dark',
-        custom: 'custom',
-      },
-      defaultTheme: 'light',
-    }),
-    (Story, context) => {
-      const themeMap = {
-        light: lightTheme,
-        dark: darkTheme,
-        custom: customTheme,
-      };
-      
-      const currentTheme = context.globals.theme || 'light';
-      const theme = themeMap[currentTheme] || lightTheme;
-      
-      return (
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <div className={currentTheme}>
-            <Story />
-          </div>
-        </ThemeProvider>
-      );
-    },
-  ],
+  decorators: [],
 };
 
 export default preview;

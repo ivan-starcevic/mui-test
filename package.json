@@ -35,7 +35,6 @@
     "@chromatic-com/storybook": "^4.1.1",
     "@storybook/addon-a11y": "^9.1.4",
     "@storybook/addon-backgrounds": "^9.0.8",
-    "@storybook/addon-controls": "^9.0.8",
     "@storybook/addon-docs": "^9.1.4",
     "@storybook/addon-measure": "^9.0.8",
     "@storybook/addon-onboarding": "^9.1.4",
