@@ -1,11 +1,12 @@
 import React from 'react';
 import {
   FormControl,
-  InputLabel,
+  FormLabel,
   OutlinedInput,
   FilledInput,
   Input,
-  FormHelperText
+  FormHelperText,
+  InputAdornment
 } from '@mui/material';
 
 const ExternalLabelTextField = ({
@@ -97,16 +98,29 @@ const ExternalLabelTextField = ({
       hiddenLabel={inputVariant === 'filled'}
       {...slotProps.root}
     >
-      <InputLabel
+      <FormLabel
         id={labelId}
         htmlFor={inputId}
-        disableAnimation={true}
-        sx={{ mb: 1 }}
+        sx={{ 
+          mb: 1,
+          fontSize: '0.875rem',
+          fontWeight: 400,
+          color: error ? 'error.main' : disabled ? 'text.disabled' : 'text.primary',
+          '&.Mui-focused': {
+            color: error ? 'error.main' : 'primary.main'
+          },
+          '&.Mui-error': {
+            color: 'error.main'
+          },
+          '&.Mui-disabled': {
+            color: 'text.disabled'
+          }
+        }}
         required={required}
         {...slotProps.label}
       >
         {label}
-      </InputLabel>
+      </FormLabel>
 
       {renderInput()}
 

@@ -6,7 +6,8 @@ import {
   Stack,
   Divider,
   FormControlLabel,
-  Switch
+  Switch,
+  InputAdornment
 } from '@mui/material';
 import { Email as EmailIcon, Lock as LockIcon, Person as PersonIcon } from '@mui/icons-material';
 import ExternalLabelTextField from './ExternalLabelTextField';
@@ -51,8 +52,14 @@ function ExternalLabelTextFieldDemo() {
             placeholder="Enter your username"
             value={formData.username}
             onChange={handleInputChange('username')}
-            InputProps={{
-              startAdornment: <PersonIcon sx={{ color: 'action.active', mr: 1 }} />
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PersonIcon sx={{ color: 'action.active', mr: 1 }} />
+                  </InputAdornment>
+                )
+              }
             }}
           />
 
@@ -64,8 +71,14 @@ function ExternalLabelTextFieldDemo() {
             placeholder="Enter your email"
             value={formData.email}
             onChange={handleInputChange('email')}
-            InputProps={{
-              startAdornment: <EmailIcon sx={{ color: 'action.active', mr: 1 }} />
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <EmailIcon sx={{ color: 'action.active', mr: 1 }} />
+                  </InputAdornment>
+                )
+              }
             }}
           />
 
@@ -77,8 +90,14 @@ function ExternalLabelTextFieldDemo() {
             placeholder="Enter your password"
             value={formData.password}
             onChange={handleInputChange('password')}
-            InputProps={{
-              startAdornment: <LockIcon sx={{ color: 'action.active', mr: 1 }} />
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <LockIcon sx={{ color: 'action.active', mr: 1 }} />
+                  </InputAdornment>
+                )
+              }
             }}
           />
         </Stack>
