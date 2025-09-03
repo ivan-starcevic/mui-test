@@ -46,6 +46,7 @@ const ExternalLabelTextField = ({
 
   // Render appropriate input component based on variant
   const renderInput = () => {
+    // Only include props that are valid for input components
     const commonProps = {
       id: inputId,
       name: name || inputId,
@@ -63,14 +64,20 @@ const ExternalLabelTextField = ({
       size,
       fullWidth,
       inputProps,
-      InputProps,
       sx,
+      // Note: otherProps should only contain valid input component props
       ...otherProps
+    };
+
+    // Separate InputProps to avoid React warnings
+    const inputSpecificProps = {
+      ...InputProps,
+      ...slotProps.input
     };
 
     switch (inputVariant) {
       case 'filled':
-        return <FilledInput {...commonProps} {...slotProps.input} />;
+        return <FilledInput {...commonProps} {...inputSpecificProps} />;
       case 'standard':
         return (
           <Input
@@ -80,12 +87,12 @@ const ExternalLabelTextField = ({
               '&.MuiInput-root': { mt: '0 !important' },
               ...sx
             }}
-            {...slotProps.input}
+            {...inputSpecificProps}
           />
         );
       case 'outlined':
       default:
-        return <OutlinedInput {...commonProps} {...slotProps.input} />;
+        return <OutlinedInput {...commonProps} {...inputSpecificProps} />;
     }
   };
 
