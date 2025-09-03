@@ -16,8 +16,8 @@ export default {
   args: {
     variant: 'outlined',
     size: 'small',
-    label: 'Text Field',
-    placeholder: 'Enter text...',
+    label: 'Label',
+    placeholder: '',
     error: false,
     disabled: false,
     required: false,
@@ -87,6 +87,10 @@ export default {
       control: { type: 'text' },
       description: 'The name attribute of the input field'
     },
+    inputProps: {
+      control: { type: 'object' },
+      description: 'Props applied to the input element'
+    },
     onChange: {
       action: 'onChange',
       description: 'Callback fired when the input value changes'
@@ -96,9 +100,60 @@ export default {
 
 // Basic story with default props
 export const Default = {
+  render: function DefaultStory(args) {
+    const [value, setValue] = React.useState(args.value || '');
+    
+    const handleChange = (event) => {
+      setValue(event.target.value);
+    };
+    
+    // Sync with args changes
+    React.useEffect(() => {
+      setValue(args.value || '');
+    }, [args.value]);
+    
+    return (
+      <ExternalLabelTextField
+        {...args}
+        value={value}
+        onChange={handleChange}
+      />
+    );
+  },
   args: {
-    label: 'Default Text Field',
-    placeholder: 'Enter some text...'
+    label: 'Label',
+    placeholder: '',
+    value: ''
+  }
+};
+
+// Interactive story with state management
+export const Interactive = {
+  render: function InteractiveStory(args) {
+    const [value, setValue] = React.useState(args.value || '');
+    
+    const handleChange = (event) => {
+      setValue(event.target.value);
+    };
+    
+    // Sync with args changes
+    React.useEffect(() => {
+      setValue(args.value || '');
+    }, [args.value]);
+    
+    return (
+      <ExternalLabelTextField
+        {...args}
+        value={value}
+        onChange={handleChange}
+      />
+    );
+  },
+  args: {
+    label: 'Interactive Text Field',
+    placeholder: 'Type here...',
+    variant: 'outlined',
+    value: 'Interactive text'
   }
 };
 
