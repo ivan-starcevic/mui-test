@@ -51,6 +51,8 @@ function ExternalLabelTextFieldDemo() {
             variant="outlined"
             placeholder="Enter your username"
             value={formData.username}
+            size="small"
+            fullWidth
             onChange={handleInputChange('username')}
             slotProps={{
               input: {
@@ -124,7 +126,7 @@ function ExternalLabelTextFieldDemo() {
           {/* Error State */}
           <ExternalLabelTextField
             label="Error Example"
-            variant="filled"
+            variant="outlined"
             error
             helperText="This field has an error"
             placeholder="This will show error styling"
@@ -141,36 +143,46 @@ function ExternalLabelTextFieldDemo() {
           {/* Disabled State */}
           <ExternalLabelTextField
             label="Disabled Field"
-            variant="standard"
+            variant="outlined"
             disabled
             value="This field is disabled"
           />
         </Stack>
       </Paper>
 
-      <Paper elevation={2} sx={{ p: 3 }}>
+      <Paper elevation={2} sx={{ p: 3, mb: 3 }}>
         <Typography variant="h6" gutterBottom>
-          Form Data
+          Fixed Width Example using ch
         </Typography>
         
-        <FormControlLabel
-          control={
-            <Switch
-              checked={showValues}
-              onChange={(e) => setShowValues(e.target.checked)}
-            />
-          }
-          label="Show form values"
-        />
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+          This example shows how to use a fixed width of e.g., width: '25ch' for consistent form layouts.
+        </Typography>
         
-        {showValues && (
-          <Box sx={{ mt: 2, p: 2, bgcolor: 'grey.50', borderRadius: 1 }}>
-            <Typography variant="body2" component="pre" sx={{ fontFamily: 'monospace' }}>
-              {JSON.stringify(formData, null, 2)}
-            </Typography>
-          </Box>
-        )}
+        <Box
+          component="form"
+          sx={{ '& > :not(style)': { m: 1, width: '40ch' } }}
+          noValidate
+          autoComplete="off"
+        >
+          <ExternalLabelTextField 
+            id="outlined-fixed" 
+            label="Outlined" 
+            variant="outlined" 
+          />
+          <ExternalLabelTextField 
+            id="filled-fixed" 
+            label="Filled" 
+            variant="filled" 
+          />
+          <ExternalLabelTextField 
+            id="standard-fixed" 
+            label="Standard" 
+            variant="standard" 
+          />
+        </Box>
       </Paper>
+
     </Box>
   );
 }
