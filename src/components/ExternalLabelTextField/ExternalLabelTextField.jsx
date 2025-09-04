@@ -72,7 +72,7 @@ const ExternalLabelTextField = ({
     // Separate InputProps to avoid React warnings
     const inputSpecificProps = {
       ...InputProps,
-      ...slotProps.input
+      ...(slotProps.input || {})
     };
 
     switch (inputVariant) {
@@ -103,7 +103,7 @@ const ExternalLabelTextField = ({
       error={error}
       disabled={disabled}
       hiddenLabel={inputVariant === 'filled'}
-      {...slotProps.root}
+      {...(slotProps.root || {})}
     >
       <FormLabel
         id={labelId}
@@ -122,7 +122,7 @@ const ExternalLabelTextField = ({
           }
         }}
         required={required}
-        {...slotProps.label}
+        {...(slotProps.label || {})}
       >
         {label}
       </FormLabel>
@@ -130,7 +130,7 @@ const ExternalLabelTextField = ({
       {renderInput()}
 
       {helperText && (
-        <FormHelperText error={error} {...slotProps.helperText}>
+        <FormHelperText error={error} {...(slotProps.helperText || {})}>
           {helperText}
         </FormHelperText>
       )}
