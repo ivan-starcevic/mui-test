@@ -110,8 +110,6 @@ const ExternalLabelTextField = ({
         htmlFor={inputId}
         sx={{ 
           mb: 1,
-          fontSize: '0.875rem',
-          fontWeight: 400,
           color: error ? 'error.main' : disabled ? 'text.disabled' : 'text.primary',
           '&.Mui-focused': {
             color: error ? 'error.main' : 'primary.main'
