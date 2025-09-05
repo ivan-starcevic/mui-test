@@ -7,7 +7,8 @@ import {
   InputAdornment,
   IconButton,
   Button,
-  Alert
+  Alert,
+  Link
 } from '@mui/material';
 import { Email as EmailIcon, Lock as LockIcon, Person as PersonIcon } from '@mui/icons-material';
 import Visibility from '@mui/icons-material/Visibility';
@@ -22,7 +23,7 @@ function ExternalLabelTextFieldDemo() {
     email: '',
     password: '',
     bio: '',
-    age: '',
+    iban: '',
     search: '',
     date: ''
   });
@@ -63,22 +64,30 @@ function ExternalLabelTextFieldDemo() {
 
     // Email validation - required field
     if (!formData.email || formData.email.trim() === '') {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'Enter your email address';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
 
-    // Age validation
-    if (formData.age) {
-      const age = parseInt(formData.age);
-      if (isNaN(age) || age < 0 || age > 120) {
-        newErrors.age = 'Age must be between 0 and 120';
+    // IBAN validation - required field
+    if (!formData.iban || formData.iban.trim() === '') {
+      newErrors.iban = 'Enter your IBAN number';
+    } else {
+      const iban = formData.iban.trim().toUpperCase();
+      
+      // Check length (7-15 characters)
+      if (iban.length < 7 || iban.length > 15) {
+        newErrors.iban = 'IBAN must be between 7 and 15 characters';
+      }
+      // Check if it starts with a country code (2 letters)
+      else if (!/^[A-Z]{2}/.test(iban)) {
+        newErrors.iban = 'IBAN must start with a country code (e.g., DE, AT)';
       }
     }
 
     // Date validation - required field
     if (!formData.date || formData.date.trim() === '') {
-      newErrors.date = 'Date is required';
+      newErrors.date = 'Enter your date';
     } else {
       const selectedDate = new Date(formData.date);
       const today = new Date();
@@ -101,7 +110,10 @@ function ExternalLabelTextFieldDemo() {
     setIsSubmitting(true);
     setSubmitMessage('');
 
-    if (validateForm()) {
+    // Validate form and get result
+    const isValid = validateForm();
+    
+    if (isValid) {
       // Simulate form submission
       try {
         await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
@@ -119,7 +131,7 @@ function ExternalLabelTextFieldDemo() {
           email: '',
           password: '',
           bio: '',
-          age: '',
+          iban: '',
           search: '',
           date: ''
         });
@@ -132,6 +144,7 @@ function ExternalLabelTextFieldDemo() {
         });
       }
     } else {
+      // Show validation errors - the errors are already set by validateForm()
       setSubmitMessage({
         type: 'error',
         text: 'Please fix the validation errors before submitting.'
@@ -209,6 +222,11 @@ function ExternalLabelTextFieldDemo() {
               input: {
                 startAdornment: (
                   <InputAdornment position="start">
+                    <LockIcon sx={{ color: 'action.active', mr: 1 }} />
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment position="end">
                     <LockIcon sx={{ color: 'action.active', mr: 1 }} />
                   </InputAdornment>
                 )
@@ -318,7 +336,7 @@ function ExternalLabelTextFieldDemo() {
               severity={submitMessage.type} 
               sx={{ mb: 2 }}
             >
-              {submitMessage.type === 'error' && Object.keys(errors).length > 1 ? (
+              {submitMessage.type === 'error' && Object.keys(errors).length > 0 ? (
                 <Box>
                   <Typography variant="body1" sx={{ mb: 1, fontWeight: 'bold' }}>
                     Some information is missing or incorrect
@@ -344,14 +362,13 @@ function ExternalLabelTextFieldDemo() {
 
           <Stack direction="column" spacing={2}>
             <ExternalLabelTextField
-            required
-              label="Email"
+              required
+              label="Email address"
               type="email"
-              placeholder="Enter your email"
               value={formData.email}
               onChange={handleInputChange('email')}
               error={!!errors.email}
-              helperText={errors.email || ''}
+              helperText={errors.email || 'We will not share this information'}
               slotProps={{
                 input: {
                   startAdornment: (
@@ -368,7 +385,6 @@ function ExternalLabelTextFieldDemo() {
               label="Password"
               type={showPassword ? 'text' : 'password'}
               autoComplete="current-password"
-              placeholder="Enter your password"
               value={formData.password}
               onChange={handleInputChange('password')}
               error={!!errors.password}
@@ -395,16 +411,25 @@ function ExternalLabelTextFieldDemo() {
             />
 
             <ExternalLabelTextField
-              label="Age"
-              type="number"
-              helperText={errors.age || "Enter your age"}
-              placeholder="Enter age"
-              value={formData.age}
-              onChange={handleInputChange('age')}
-              error={!!errors.age}
+              label="IBAN"
+              type="text"
+              required
+              helperText={errors.iban || (
+                <span>
+                  Must be between 7 and 15 characters. E.g., DE1234567890. 
+                  <Link href="#" sx={{ ml: 1 }}>
+                    Look up your IBAN number.
+                  </Link>
+                </span>
+              )}
+              value={formData.iban}
+              onChange={handleInputChange('iban')}
+              error={!!errors.iban}
               slotProps={{
                 input: {
-                  inputProps: { min: 0, max: 120 }
+                  inputProps: { 
+                    style: { textTransform: 'uppercase' }
+                  }
                 }
               }}
             />
@@ -412,7 +437,6 @@ function ExternalLabelTextFieldDemo() {
             <ExternalLabelTextField
               label="Search"
               type="search"
-              placeholder="Search..."
               value={formData.search}
               onChange={handleInputChange('search')}
             />
@@ -422,12 +446,12 @@ function ExternalLabelTextFieldDemo() {
               label="Date"
               type="date"
               required
-              placeholder="Enter your date"
               value={formData.date}
               onChange={handleInputChange('date')}
               error={!!errors.date}
               helperText={errors.date || ''}
             />
+
 
             {/* Submit Button */}
             <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
