@@ -196,6 +196,7 @@ function ExternalLabelTextFieldDemo() {
             label="Email (Filled)"
             variant="filled"
             type="email"
+            size="small"
             placeholder="Enter your email"
             value={formData.email}
             onChange={handleInputChange('email')}
@@ -215,6 +216,7 @@ function ExternalLabelTextFieldDemo() {
             label="Password (Standard)"
             variant="standard"
             type="password"
+            size="medium"
             placeholder="Enter your password"
             value={formData.password}
             onChange={handleInputChange('password')}
