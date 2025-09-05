@@ -66,7 +66,7 @@ function ExternalLabelTextFieldDemo() {
     if (!formData.email || formData.email.trim() === '') {
       newErrors.email = 'Enter your email address';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = 'Enter an email address in the correct format, like name@example.com';
     }
 
     // IBAN validation - required field
@@ -87,12 +87,12 @@ function ExternalLabelTextFieldDemo() {
 
     // Date validation - required field
     if (!formData.date || formData.date.trim() === '') {
-      newErrors.date = 'Enter your date';
+      newErrors.date = 'Please enter your passport\'s issue date, including day, month, and year.';
     } else {
       const selectedDate = new Date(formData.date);
       const today = new Date();
       if (selectedDate > today) {
-        newErrors.date = 'Date cannot be in the future';
+        newErrors.date = 'Passport issue date cannot be in the future';
       }
     }
 
@@ -348,7 +348,22 @@ function ExternalLabelTextFieldDemo() {
                     {Object.keys(errors).map((fieldName) => (
                       <Box component="li" key={fieldName} sx={{ mb: 0.5 }}>
                         <Typography variant="body1">
-                          {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}
+                          <Link
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              const fieldId = fieldName === 'date' ? 'standard-date-input' : 
+                                             fieldName === 'email' ? 'standard-email-input' :
+                                             fieldName === 'iban' ? 'standard-iban-input' :
+                                             fieldName === 'password' ? 'standard-password-input' : '';
+                              if (fieldId) {
+                                document.getElementById(fieldId)?.focus();
+                              }
+                            }}
+                            sx={{ cursor: 'pointer', textDecoration: 'underline' }}
+                          >
+                            {errors[fieldName]}
+                          </Link>
                         </Typography>
                       </Box>
                     ))}
@@ -362,13 +377,14 @@ function ExternalLabelTextFieldDemo() {
 
           <Stack direction="column" spacing={2}>
             <ExternalLabelTextField
+              id="standard-email-input"
               required
               label="Email address"
               type="email"
               value={formData.email}
               onChange={handleInputChange('email')}
               error={!!errors.email}
-              helperText={errors.email || 'We will not share this information'}
+              helperText={errors.email || 'We’ll only use this to send you a receipt'}
               slotProps={{
                 input: {
                   startAdornment: (
@@ -411,6 +427,7 @@ function ExternalLabelTextFieldDemo() {
             />
 
             <ExternalLabelTextField
+              id="standard-iban-input"
               label="IBAN"
               type="text"
               required
@@ -443,7 +460,7 @@ function ExternalLabelTextFieldDemo() {
 
             <ExternalLabelTextField
               id="standard-date-input"
-              label="Date"
+              label="When was your passport issued?"
               type="date"
               required
               value={formData.date}
